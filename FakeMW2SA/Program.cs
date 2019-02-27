@@ -10,23 +10,22 @@ namespace FakeMW2SA
     class Program
     {
         public static Object thisLock = new Object();
-        public static string myexternalip = new WebClient().DownloadString("http://icanhazip.com").Trim();
+        public static string MyExternalIP = new WebClient().DownloadString("http://icanhazip.com").Trim();
         public static List<PlayerModel> players = new List<PlayerModel>();
         public static int playerID = 0;
-        public static bool geoip = false;
-        public static int apicalls = 0;
-        public static int partystate = 0;
-        public static int memberjoin = 0;
+        public static int ApiCalls = 0;
+        public static int NumberOfPartystatePackets = 0;
+        public static int NumberOfMemberjoinPackets = 0;
         public static int csrf = new Random().Next();
         public static List<string> ipaddresses = new List<string>();
         public static int ipindex = 0;
-        public static void addipaddress(string item)
+        public static void Addipaddress(string item)
         {
 
             lock (thisLock)
             {
                 ipaddresses.Insert(0, item);
-                if (ipaddresses.Count >= 100)
+                if (ipaddresses.Count >= 1000)
                 {
                     ipaddresses.RemoveRange(50, 50);
                 }
@@ -71,15 +70,15 @@ namespace FakeMW2SA
         //This function writes some statistics to the bottom of the cmd winndow
         public static void WriteOnBottomLine(string text)
         {
-            if (text == "memberjoin") { memberjoin += 1; }
-            else if (text == "partystate") { partystate += 1; }
-            else if (text == "apicalls") { apicalls += 1; }
+            if (text == "memberjoin") { NumberOfMemberjoinPackets += 1; }
+            else if (text == "partystate") { NumberOfPartystatePackets += 1; }
+            else if (text == "apicalls") { ApiCalls += 1; }
             else { playersinpacket = text + "  "; }
 
             int x = Console.CursorLeft;
             int y = Console.CursorTop;
             Console.CursorTop = Console.WindowTop + Console.WindowHeight - 1;
-            Console.Write("Partystate packets: {0} | Memberjoin packets: {1} | Api calls: {2} | Players in last partystate: {3}", partystate, memberjoin, apicalls, playersinpacket);
+            Console.Write("Partystate packets: {0} | Memberjoin packets: {1} | Api calls: {2} | Players in last partystate: {3}", NumberOfPartystatePackets, NumberOfMemberjoinPackets, ApiCalls, playersinpacket);
             // Restore previous position
             Console.SetCursorPosition(x, y);
         }

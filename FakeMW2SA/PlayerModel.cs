@@ -27,7 +27,7 @@ namespace FakeMW2SA
         public int vacbanned { get; set; }
         public int numberofvacbans { get; set; }
         public int dateoflastban { get; set; } 
-        public int numberofgamebans { get; set; }
+        public int numberogamebans { get; set; }
         public int mw2hours { get; set; }
         public int csgohours { get; set; }
         public int cssourcehours { get; set; }
@@ -54,9 +54,9 @@ namespace FakeMW2SA
         public bool updated { get; set; } = false;
         public int vacbypass { get; set; } = 2;
     }
-    public class jsonoutput
+    public class JsonOutput
     {
-        public jsonoutput()
+        public JsonOutput()
         {
             try
             {
@@ -73,9 +73,9 @@ namespace FakeMW2SA
         public List<string> ipaddresses { get; set; }
         public List<FakeMW2SA.PlayerModel> players { get; set; } = FakeMW2SA.Program.players;
         public string host { get; set; } = "0.0.0.0";
-        public int apicalls { get; set; } = FakeMW2SA.Program.apicalls;
-        public int partystatecount { get; set; } = FakeMW2SA.Program.partystate;
-        public int memberjoincount { get; set; } = FakeMW2SA.Program.memberjoin;
+        public int ApiCalls { get; set; } = FakeMW2SA.Program.ApiCalls;
+        public int PartystateCount { get; set; } = FakeMW2SA.Program.NumberOfPartystatePackets;
+        public int MemberjoinCount { get; set; } = FakeMW2SA.Program.NumberOfMemberjoinPackets;
 
 }
 }

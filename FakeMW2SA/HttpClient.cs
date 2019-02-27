@@ -103,7 +103,7 @@ namespace FakeMW2SA
                         {
                             case "players":
                                 response.ContentType = "application/json";
-                                responseString = JsonConvert.SerializeObject(new FakeMW2SA.jsonoutput());
+                                responseString = JsonConvert.SerializeObject(new FakeMW2SA.JsonOutput());
                                 break;
                             case "ban":
                                 FakeMW2SA.Utils.Ban(request.QueryString.GetValues("ip")[0]);
@@ -115,7 +115,7 @@ namespace FakeMW2SA
                                 FakeMW2SA.Utils.Clearfirewall();
                                 break;
                             case "host":
-                                    responseString = JsonConvert.SerializeObject(new FakeMW2SA.jsonoutput());
+                                    responseString = JsonConvert.SerializeObject(new FakeMW2SA.JsonOutput());
                                 break;
                             default:
                                 break;

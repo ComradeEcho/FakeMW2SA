@@ -5,9 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace FakeMW2SA
 {
@@ -127,9 +124,9 @@ namespace FakeMW2SA
             {
                 (FakeMW2SA.Program.players.Find(x => x.ip == SourceIP)).host = true;
             }
-            else if ((FakeMW2SA.Program.players.Find(x => x.ip == FakeMW2SA.Program.myexternalip) != null))
+            else if ((FakeMW2SA.Program.players.Find(x => x.ip == FakeMW2SA.Program.MyExternalIP) != null))
             {
-                (FakeMW2SA.Program.players.Find(x => x.ip == FakeMW2SA.Program.myexternalip)).host = true;
+                (FakeMW2SA.Program.players.Find(x => x.ip == FakeMW2SA.Program.MyExternalIP)).host = true;
             }
         }
         public static int FindPartyID()
@@ -172,7 +169,7 @@ namespace FakeMW2SA
                     {
                         wc.Encoding = System.Text.Encoding.UTF8;
                         int backgroundapicalls = Int32.Parse(JObject.Parse(wc.DownloadString(url))["0"]["apicalls"].ToString());
-                        FakeMW2SA.Program.apicalls = FakeMW2SA.Program.apicalls + backgroundapicalls;
+                        FakeMW2SA.Program.ApiCalls = FakeMW2SA.Program.ApiCalls + backgroundapicalls;
                         using (IEnumerator<JToken> enumerator2 = ((IEnumerable<JToken>)JObject.Parse(wc.DownloadString(url))["response"]["players"]).GetEnumerator())
                         {
                             while (enumerator2.MoveNext())
@@ -191,7 +188,7 @@ namespace FakeMW2SA
                                 if (each["vacbanned"].Type != JTokenType.Null) { player.vacbanned = Convert.ToInt32(each["vacbanned"]); }
                                 if (each["numberofvacbans"].Type != JTokenType.Null) { player.numberofvacbans = Convert.ToInt32(each["numberofvacbans"]); }
                                 if (each["dateoflastban"].Type != JTokenType.Null) { player.dateoflastban = Convert.ToInt32(each["dateoflastban"]); }
-                                if (each["numberofgamebans"].Type != JTokenType.Null) { player.numberofgamebans = Convert.ToInt32(each["numberofgamebans"]); }
+                                if (each["numberofgamebans"].Type != JTokenType.Null) { player.numberogamebans = Convert.ToInt32(each["numberofgamebans"]); }
                                 if (each["mw2hours"].Type != JTokenType.Null) { player.mw2hours = Convert.ToInt32(each["mw2hours"]); }
                                 if (each["csgohours"].Type != JTokenType.Null) { player.csgohours = Convert.ToInt32(each["csgohours"]); }
                                 if (each["cssourcehours"].Type != JTokenType.Null) { player.cssourcehours = Convert.ToInt32(each["cssourcehours"]); }
@@ -210,18 +207,6 @@ namespace FakeMW2SA
                     Console.WriteLine(e);
                     Console.WriteLine(url);
                 }
-            }
-        }
-
-        public static void GetsteamID()
-        {
-            if (File.Exists("C:\\Program Files (x86)\\Steam\\config\\loginusers.vdf"))
-            {
-                
-            }
-            else if (File.Exists(Microsoft.Win32.Registry.GetValue("HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Valve\\Steam\\", "InstallPath", "null").ToString() + "\\config\\loginusers.vdf"))
-            {
-                Console.WriteLine("Geolocation file not found. Disabling player location services.");
             }
         }
     }

@@ -53,19 +53,19 @@ namespace FakeMW2SA
             int numberofplayers = 0;
             var packet = Packet.ParsePacket(captureEventArgs.Packet.LinkLayerType, captureEventArgs.Packet.Data);
             var eth = (EthernetPacket)packet;
-            var hex = BitConverter.ToString(eth.BytesHighPerformance.Bytes).Replace("-", string.Empty);
-            var DestIP = new IPAddress(long.Parse(FakeMW2SA.Utils.ReverseBytes(hex.Substring(60, 8)), System.Globalization.NumberStyles.AllowHexSpecifier)).ToString();
-            var SourceIP = new IPAddress(long.Parse(FakeMW2SA.Utils.ReverseBytes(hex.Substring(52, 8)), System.Globalization.NumberStyles.AllowHexSpecifier)).ToString();
-            if (!localipaddresses.Contains(SourceIP)){ FakeMW2SA.Program.addipaddress(SourceIP); }
+            var PacketPayloadInHex = BitConverter.ToString(eth.BytesHighPerformance.Bytes).Replace("-", string.Empty);
+            var DestIP = new IPAddress(long.Parse(FakeMW2SA.Utils.ReverseBytes(PacketPayloadInHex.Substring(60, 8)), System.Globalization.NumberStyles.AllowHexSpecifier)).ToString();
+            var SourceIP = new IPAddress(long.Parse(FakeMW2SA.Utils.ReverseBytes(PacketPayloadInHex.Substring(52, 8)), System.Globalization.NumberStyles.AllowHexSpecifier)).ToString();
+            if (!localipaddresses.Contains(SourceIP)){ FakeMW2SA.Program.Addipaddress(SourceIP); }
 
-            if (hex.Contains(@"70617274797374617465")) //"partystate" - The partystate packet contains a lot of information including player name, steam ID, reported IP, and score information.
+            if (PacketPayloadInHex.Contains(@"70617274797374617465")) //"partystate" - The partystate packet contains a lot of information including player name, steam ID, reported IP, and score information.
             {
                 FakeMW2SA.Program.WriteOnBottomLine("partystate");
                 FakeMW2SA.Utils.SetHost(SourceIP);
                 string playerpatern = @"0{10}.{40}0{48}.{28}";
                 MatchCollection matches2;
                 Regex playerregex = new Regex(playerpatern);
-                matches2 = playerregex.Matches(hex);
+                matches2 = playerregex.Matches(PacketPayloadInHex);
                 var IDlist = new List<string>();
                 for (int ctr = 0; ctr < matches2.Count; ctr++)
                 {
@@ -143,11 +143,11 @@ namespace FakeMW2SA
                 FakeMW2SA.Utils.CallApis();
             }
 
-            if (hex.Contains(@"6D656D62"))//"memberjoin" We log the header IP and player name from these packets, to defeat IP spoofers.
+            if (PacketPayloadInHex.Contains(@"6D656D62"))//"memberjoin" We log the header IP and player name from these packets, to defeat IP spoofers.
             {
                 FakeMW2SA.Program.WriteOnBottomLine("memberjoin");
                 string PlayerNameInHex;
-                Match match = Regex.Match(hex, @"(?:[0-9a-fA-F][0-9a-fA-F])+?0{48}.{16}([0-9a-fA-F]+?)0000");
+                Match match = Regex.Match(PacketPayloadInHex, @"(?:[0-9a-fA-F][0-9a-fA-F])+?0{48}.{16}([0-9a-fA-F]+?)0000");
                 while (match.Success)
                 {
                     if (match.Groups[1].Value.Length % 2 != 0)
