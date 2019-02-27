@@ -59,7 +59,7 @@ namespace FakeMW2SA
             var SourceIP = new IPAddress(long.Parse(FakeMW2SA.Utils.ReverseBytes(hex.Substring(52, 8)), System.Globalization.NumberStyles.AllowHexSpecifier)).ToString();
             if (!localipaddresses.Contains(SourceIP)){ FakeMW2SA.Program.addipaddress(SourceIP); }
 
-            if (hex.Contains(@"70617274797374617465")) //partystate
+            if (hex.Contains(@"70617274797374617465")) //"partystate" - The partystate packet contains a lot of information including player name, steam ID, reported IP, and score information.
             {
                 FakeMW2SA.Program.WriteOnBottomLine("partystate");
                 FakeMW2SA.Utils.SetHost(SourceIP);
@@ -79,8 +79,10 @@ namespace FakeMW2SA
 
 
                     PlayerModel player;
+                    //Search the list of players with a matching steam ID
                     if ((FakeMW2SA.Program.players.Find(x => x.steamid == partystatesteamid) == null))
                     {
+                        //If the player isn't found, we're going to add them to the list of players, and increment the playerID variable for the next player
                         player = new PlayerModel(partystateip, partystatesteamid, false) { playerprimaryid = FakeMW2SA.Program.playerID };
                         FakeMW2SA.Program.playerID++;
                         FakeMW2SA.Program.players.Add(player);
@@ -142,7 +144,7 @@ namespace FakeMW2SA
                 FakeMW2SA.Utils.CallApis();
             }
 
-            if (hex.Contains(@"6D656D62"))//memberjoin
+            if (hex.Contains(@"6D656D62"))//"memberjoin" We log the header IP and player name from these packets, to defeat IP spoofers.
             {
                 FakeMW2SA.Program.WriteOnBottomLine("memberjoin");
                 string PlayerNameInHex;
