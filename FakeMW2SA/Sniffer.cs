@@ -16,8 +16,7 @@ namespace FakeMW2SA
         private const int ReadTimeoutMilliseconds = 5000;
         public static void Run()
         {
-            //Clear firewall rules upon first launching the application
-            FakeMW2SA.Utils.Clearfirewall();
+            FakeMW2SA.Utils.Clearfirewall(); //Clear firewall rules upon first launching the application
             var devices = CaptureDeviceList.Instance;
             if (devices.Count < 1)
             {
@@ -93,13 +92,13 @@ namespace FakeMW2SA
                     }
                     if ((FakeMW2SA.Program.players.Find(x => x.unknown1 == int.Parse(matches2[ctr].Value.Substring(98, 8), System.Globalization.NumberStyles.HexNumber)) == null))
                     {
-                        player.partyID = FakeMW2SA.Utils.findPartyID();
+                        player.partyID = FakeMW2SA.Utils.FindPartyID();
                     }
                     else
                     {
                         if (int.Parse(matches2[ctr].Value.Substring(98, 8), System.Globalization.NumberStyles.HexNumber) == 0)
                         {
-                            player.partyID = FakeMW2SA.Utils.findPartyID();
+                            player.partyID = FakeMW2SA.Utils.FindPartyID();
                         }
                         else
                         {
@@ -168,7 +167,7 @@ namespace FakeMW2SA
                     if ((FakeMW2SA.Program.players.Find(x => x.ip == SourceIP) == null))
                     {
                     FakeMW2SA.Program.playerID++;
-                    player.partyID = FakeMW2SA.Utils.findPartyID();
+                    player.partyID = FakeMW2SA.Utils.FindPartyID();
                     FakeMW2SA.Program.players.Add(player);
                     } 
                 }

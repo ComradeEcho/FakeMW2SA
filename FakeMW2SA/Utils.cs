@@ -132,7 +132,7 @@ namespace FakeMW2SA
                 (FakeMW2SA.Program.players.Find(x => x.ip == FakeMW2SA.Program.myexternalip)).host = true;
             }
         }
-        public static int findPartyID()
+        public static int FindPartyID()
         {
 
             for (int i = 1; i <= 1000; i++)
@@ -163,16 +163,14 @@ namespace FakeMW2SA
             foreach (FakeMW2SA.PlayerModel each in playerstolookup) { Ipaddresses = Ipaddresses + each.ip + ","; }
             if (playerstolookup.Count > 0)
             {
-                string url = "https://mw2.adie.space/testing2.php?steamids=" + SteamIDs.TrimEnd(',') + "&ips=" + Ipaddresses.TrimEnd(',');
+                //This is a caching API proxy I wrote and run. It's used both to prevent this program from bugging steam too much, and also to keep my API key safe.
+                //see https://mw2.adie.space/lookup.php?steamids=76561198036680398 for an example of the JSON output.
+                string url = "https://mw2.adie.space/lookup.php?steamids=" + SteamIDs.TrimEnd(',') + "&ips=" + Ipaddresses.TrimEnd(',');
                 try
                 {
                     using (WebClient wc = new WebClient())
                     {
                         wc.Encoding = System.Text.Encoding.UTF8;
-                        
-                        //var json = wc.DownloadString(url);
-                        //var apidata = JObject.Parse(json);
-                        //foreach (each in apidata)
                         int backgroundapicalls = Int32.Parse(JObject.Parse(wc.DownloadString(url))["0"]["apicalls"].ToString());
                         FakeMW2SA.Program.apicalls = FakeMW2SA.Program.apicalls + backgroundapicalls;
                         using (IEnumerator<JToken> enumerator2 = ((IEnumerable<JToken>)JObject.Parse(wc.DownloadString(url))["response"]["players"]).GetEnumerator())
