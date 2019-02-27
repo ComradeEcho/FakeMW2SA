@@ -52,7 +52,7 @@ namespace FakeMW2SA
         {
             if (eventType == 2)
             {
-                FakeMW2SA.Utils.clearfirewall();
+                FakeMW2SA.Utils.Clearfirewall();
             }
             return false;
         }
@@ -68,6 +68,7 @@ namespace FakeMW2SA
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
         public static string playersinpacket = "0";
+        //This function writes some statistics to the bottom of the cmd winndow
         public static void WriteOnBottomLine(string text)
         {
             if (text == "memberjoin") { memberjoin += 1; }

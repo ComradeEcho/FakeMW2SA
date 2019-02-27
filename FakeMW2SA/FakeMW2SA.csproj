@@ -97,7 +97,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HttpClient.cs" />
     <Compile Include="PlayerModel.cs" />
     <Compile Include="Program.cs" />

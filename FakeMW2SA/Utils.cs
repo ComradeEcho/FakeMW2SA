@@ -13,7 +13,7 @@ namespace FakeMW2SA
 {
     class Utils
     {
-        public static void runCommand(string command)
+        public static void RunCommand(string command)
         {
             Process cmd = new Process();
             cmd.StartInfo.FileName = "cmd.exe";
@@ -29,19 +29,15 @@ namespace FakeMW2SA
             cmd.StandardInput.Close();
             cmd.WaitForExit();
         }
-        public static void firewall(string ip)
-        {
-            runCommand("route add " + ip + " mask 255.255.255.255 12.34.56.78 IF 1 ");
-        }
-        public static void clearfirewall()
+        public static void Clearfirewall()
         {
             foreach (PlayerModel each in FakeMW2SA.Program.players)
             {
                 each.banned = "False";
             }
-            runCommand("route delete * 12.34.56.78");
+            RunCommand("route delete * 12.34.56.78");
         }
-        public static void unban(string ip)
+        public static void Unban(string ip)
         {
             if (ip.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).Length == 4)
             {
@@ -50,10 +46,10 @@ namespace FakeMW2SA
                 {
                     player.banned = "False";
                 }
-                runCommand("route delete " + ip + " 12.34.56.78");
+                RunCommand("route delete " + ip + " 12.34.56.78");
             }
         }
-        public static void ban(string ip)
+        public static void Ban(string ip)
         {
             if (ip.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).Length == 4)
             {
@@ -63,7 +59,7 @@ namespace FakeMW2SA
                     player.banned = "True";
                 }
                 Console.WriteLine("route add " + ip + " 12.34.56.78");
-                runCommand("route add " + ip + " 12.34.56.78 IF 1");
+                RunCommand("route add " + ip + " 12.34.56.78 IF 1");
             }
                 
         }
@@ -121,7 +117,7 @@ namespace FakeMW2SA
             }
             return bytes;
         }
-        public static void sethost(string SourceIP)
+        public static void SetHost(string SourceIP)
         {
             foreach (PlayerModel each in FakeMW2SA.Program.players)
             {
@@ -148,7 +144,7 @@ namespace FakeMW2SA
             }
             return 999;
         }
-        public static void callapis()
+        public static void CallApis()
         {
             string SteamIDs = "";
             string Ipaddresses = "";
@@ -219,7 +215,7 @@ namespace FakeMW2SA
             }
         }
 
-        public static void getsteamID()
+        public static void GetsteamID()
         {
             if (File.Exists("C:\\Program Files (x86)\\Steam\\config\\loginusers.vdf"))
             {

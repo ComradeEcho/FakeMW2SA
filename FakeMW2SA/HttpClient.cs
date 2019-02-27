@@ -106,13 +106,13 @@ namespace FakeMW2SA
                                 responseString = JsonConvert.SerializeObject(new FakeMW2SA.jsonoutput());
                                 break;
                             case "ban":
-                                FakeMW2SA.Utils.ban(request.QueryString.GetValues("ip")[0]);
+                                FakeMW2SA.Utils.Ban(request.QueryString.GetValues("ip")[0]);
                                 break;
                             case "unban":
-                                FakeMW2SA.Utils.unban(request.QueryString.GetValues("ip")[0]);
+                                FakeMW2SA.Utils.Unban(request.QueryString.GetValues("ip")[0]);
                                 break;
                             case "clearbans":
-                                FakeMW2SA.Utils.clearfirewall();
+                                FakeMW2SA.Utils.Clearfirewall();
                                 break;
                             case "host":
                                     responseString = JsonConvert.SerializeObject(new FakeMW2SA.jsonoutput());
