@@ -73,9 +73,9 @@ namespace FakeMW2SA
         public List<string> ipaddresses { get; set; }
         public List<FakeMW2SA.PlayerModel> players { get; set; } = FakeMW2SA.Program.players;
         public string host { get; set; } = "0.0.0.0";
-        public int ApiCalls { get; set; } = FakeMW2SA.Program.ApiCalls;
-        public int PartystateCount { get; set; } = FakeMW2SA.Program.NumberOfPartystatePackets;
-        public int MemberjoinCount { get; set; } = FakeMW2SA.Program.NumberOfMemberjoinPackets;
+        public int apicalls { get; set; } = FakeMW2SA.Program.apicalls;
+        public int partystatecount { get; set; } = FakeMW2SA.Program.partystatecount;
+        public int memberjoincount { get; set; } = FakeMW2SA.Program.memberjoincount;
 
 }
 }
