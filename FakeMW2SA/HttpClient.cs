@@ -22,7 +22,7 @@ namespace FakeMW2SA
                 listener.Prefixes.Add("http://localhost:28961/");
                 listener.Prefixes.Add("http://127.0.0.1:28961/");
                 listener.Start();
-                Console.WriteLine("Listening on http://localhost:28961 and http://127.0.0.1:28961/");
+                Console.WriteLine("Listening on http://localhost:28961 and http://127.0.0.1:28961");
                 while (true)
                 {
                     string responseString = String.Format("" + @"
@@ -128,10 +128,14 @@ namespace FakeMW2SA
                     
                 }
             }
+            catch (HttpListenerException)
+            {
+                Console.WriteLine("Unable to open the application on port 28961. Is the application already running?");
+                Console.ReadLine();
+            }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
-                Console.ReadLine();
+                Console.WriteLine(e);
             }
         }
         public static void Start()
