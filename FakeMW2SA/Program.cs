@@ -11,7 +11,7 @@ namespace FakeMW2SA
     {
         public static Object thisLock = new Object();
         public static string MyExternalIP;
-        public static string UpdateCheck;
+        public static string LatestVersion;
         public static string MOTD;
         public static List<PlayerModel> players = new List<PlayerModel>();
         public static int playerID = 0;
@@ -23,7 +23,6 @@ namespace FakeMW2SA
         public static int ipindex = 0;
         public static Version CurrentVersion = new Version("1.1.0");
         public static void InitialWebCalls()
-
         {
             using (WebClient client = new WebClient())
             {
@@ -41,12 +40,13 @@ namespace FakeMW2SA
                     MyExternalIP = "0.0.0.0";
                 }
                 try {
-                    UpdateCheck = client.DownloadString("https://mw2.adie.space/update.php").Trim();
+                    LatestVersion = client.DownloadString("https://mw2.adie.space/latestversion.php").Trim();
                     try
                     {
-                        Version NewestVersion = new Version(UpdateCheck);
+                        Version NewestVersion = new Version(LatestVersion);
                         if (CurrentVersion.CompareTo(NewestVersion) < 0) {
-                            Console.WriteLine("Update Available.");
+                            Console.WriteLine("Update Available. Check https://mw2.adie.space/download");
+                            Console.WriteLine("Current version: " + CurrentVersion.ToString() + " Latest version: " + LatestVersion.ToString());
                         }
                         if (CurrentVersion.CompareTo(NewestVersion) > 0)
                         {
