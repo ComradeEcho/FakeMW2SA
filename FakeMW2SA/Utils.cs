@@ -114,7 +114,7 @@ namespace FakeMW2SA
             }
             return bytes;
         }
-        public static void SetHost(string SourceIP)
+        public static void SetHost(string SourceIP) //This function doesn't really work reliably, especially if we are host
         {
             foreach (PlayerModel each in FakeMW2SA.Program.players)
             {
