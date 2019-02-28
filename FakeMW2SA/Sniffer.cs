@@ -24,7 +24,8 @@ namespace FakeMW2SA
             }
             foreach (SharpPcap.WinPcap.WinPcapDevice dev in devices)
             {
-                Console.Out.WriteLine("{0}", dev.Description);
+                //Write each device to the console.
+                //Console.Out.WriteLine("{0}", dev.Description);
 
                 foreach (SharpPcap.LibPcap.PcapAddress addr in dev.Addresses)
                 {
