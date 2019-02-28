@@ -35,14 +35,6 @@ namespace FakeMW2SA
         }
         static void Main(string[] args)
         {
-            if (!HasAdministratorPrivileges())
-            {
-                Console.WriteLine("Please run as administrator. Press any key to close.");
-                Console.ReadKey();
-                return;
-            }
-            handler = new ConsoleEventDelegate(ConsoleEventCallback);
-            SetConsoleCtrlHandler(handler, true);
             FakeMW2SA.HttpClient.Start();
             FakeMW2SA.Sniffer.Start();
             WriteOnBottomLine("0");
@@ -55,17 +47,6 @@ namespace FakeMW2SA
                 FakeMW2SA.Utils.Clearfirewall();
             }
             return false;
-        }
-        static ConsoleEventDelegate handler;   // Keeps it from getting garbage collected
-                                               // Pinvoke
-        private delegate bool ConsoleEventDelegate(int eventType);
-        [DllImport("kernel32.dll", SetLastError = true)]
-        private static extern bool SetConsoleCtrlHandler(ConsoleEventDelegate callback, bool add);
-        private static bool HasAdministratorPrivileges()
-        {
-            WindowsIdentity id = WindowsIdentity.GetCurrent();
-            WindowsPrincipal principal = new WindowsPrincipal(id);
-            return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
         public static string playersinpacket = "0";
         //This function writes some statistics to the bottom of the cmd winndow
