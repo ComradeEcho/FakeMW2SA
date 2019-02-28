@@ -61,7 +61,7 @@ namespace FakeMW2SA
 
             if (PacketPayloadInHex.Contains(@"70617274797374617465")) //"partystate" - The partystate packet contains a lot of information including player name, steam ID, reported IP, and score information.
             {
-                FakeMW2SA.Program.WriteOnBottomLine("partystate");
+                FakeMW2SA.Program.WriteOnBottomLine("partystate");//incriment the console partystate count by one
                 FakeMW2SA.Utils.SetHost(SourceIP);
                 string playerpatern = @"0{10}.{40}0{48}.{28}";
                 MatchCollection matches2;
