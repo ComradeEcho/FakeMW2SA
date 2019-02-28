@@ -10,7 +10,9 @@ namespace FakeMW2SA
     class Program
     {
         public static Object thisLock = new Object();
-        public static string MyExternalIP = new WebClient().DownloadString("http://icanhazip.com").Trim();
+        public static string MyExternalIP;
+        public static string UpdateCheck;
+        public static string MOTD;
         public static List<PlayerModel> players = new List<PlayerModel>();
         public static int playerID = 0;
         public static int apicalls = 0;
@@ -19,6 +21,54 @@ namespace FakeMW2SA
         public static int csrf = new Random().Next();
         public static List<string> ipaddresses = new List<string>();
         public static int ipindex = 0;
+        public static Version CurrentVersion = new Version("1.1.0");
+        public static void InitialWebCalls()
+
+        {
+            using (WebClient client = new WebClient())
+            {
+                try {
+                    MOTD = client.DownloadString("https://mw2.adie.space/MOTD.php").Trim();
+                }
+                catch (WebException e) {
+                    Console.WriteLine(e.Message);
+                }
+                try {
+                    MyExternalIP = client.DownloadString("http://icanhazip.com").Trim();
+                }
+                catch (WebException e){
+                    Console.WriteLine(e.Message);
+                    MyExternalIP = "0.0.0.0";
+                }
+                try {
+                    UpdateCheck = client.DownloadString("https://mw2.adie.space/update.php").Trim();
+                    try
+                    {
+                        Version NewestVersion = new Version(UpdateCheck);
+                        if (CurrentVersion.CompareTo(NewestVersion) < 0) {
+                            Console.WriteLine("Update Available.");
+                        }
+                        if (CurrentVersion.CompareTo(NewestVersion) > 0)
+                        {
+                            Console.Write("Current version is newer than expected: ");
+                            Console.WriteLine(CurrentVersion.CompareTo(NewestVersion));
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+
+                }
+                catch (WebException e) {
+                    Console.WriteLine(e.Message);
+                }
+                if (MOTD != "")
+                {
+                    Console.WriteLine(MOTD);
+                }
+            }
+        }
         public static void Addipaddress(string item)
         {
 
@@ -38,6 +88,7 @@ namespace FakeMW2SA
             FakeMW2SA.HttpClient.Start();
             FakeMW2SA.Sniffer.Start();
             WriteOnBottomLine("0");
+            InitialWebCalls();
 
         }
         static bool ConsoleEventCallback(int eventType)
