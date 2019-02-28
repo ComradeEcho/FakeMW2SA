@@ -77,7 +77,6 @@ namespace FakeMW2SA
                     var partystatesteamid = long.Parse(FakeMW2SA.Utils.ReverseBytes(matches2[ctr].Value.Substring(10, 16)), System.Globalization.NumberStyles.HexNumber).ToString();
                     var partystateip = new IPAddress(long.Parse(FakeMW2SA.Utils.ReverseBytes(matches2[ctr].Value.Substring(34, 8)), System.Globalization.NumberStyles.AllowHexSpecifier)).ToString();
 
-
                     PlayerModel player;
                     //Search the list of players with a matching steam ID
                     if ((FakeMW2SA.Program.players.Find(x => x.steamid == partystatesteamid) == null))
@@ -106,8 +105,6 @@ namespace FakeMW2SA
                             player.partyID = (FakeMW2SA.Program.players.Find(x => x.unknown1 == int.Parse(matches2[ctr].Value.Substring(98, 8), System.Globalization.NumberStyles.HexNumber))).partyID;
                         }
                     }
-
-
                     TimeSpan t = DateTime.UtcNow - new DateTime(1970, 1, 1);
                     int secondsSinceEpoch = (int)t.TotalSeconds;
                     player.updated = false;
@@ -173,10 +170,6 @@ namespace FakeMW2SA
                     } 
                 }
             }
-            
-            
-
-
         }
         public static void Start()
         {
