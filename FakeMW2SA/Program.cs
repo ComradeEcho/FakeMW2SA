@@ -24,10 +24,11 @@ namespace FakeMW2SA
 
             lock (thisLock)
             {
+                //insert IP address into the beginning of the list, if the list grows to 300, remove the last 10
                 ipaddresses.Insert(0, item);
-                if (ipaddresses.Count >= 100)
+                if (ipaddresses.Count >= 300)
                 {
-                    ipaddresses.RemoveRange(90, 10);
+                    ipaddresses.RemoveRange(290, 10);
                 }
             }
             
