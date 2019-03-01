@@ -21,7 +21,7 @@ namespace FakeMW2SA
         public static int csrf = new Random().Next();
         public static List<string> ipaddresses = new List<string>();
         public static int ipindex = 0;
-        public static Version CurrentVersion = new Version("1.1.0");
+        public static Version CurrentVersion = new Version(typeof(FakeMW2SA.Program).Assembly.GetName().Version.ToString());
         public static void InitialWebCalls()
         {
             using (WebClient client = new WebClient())
