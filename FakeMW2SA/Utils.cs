@@ -148,9 +148,15 @@ namespace FakeMW2SA
             List<PlayerModel> playerstolookup = new List<PlayerModel>();
             foreach (PlayerModel each in FakeMW2SA.Program.players)
             {
-                if (each.personaname == null || (each.memberjoin == false && each.updated == false && GetEpochSeconds() - 60 > each.lastseen)) { playerstolookup.Add(each); each.updated = true; }
+                //If we don't have the player name OR they're not a memberjoin packet and they're not updated and they haven't been seen within 60 seconds
+                //put them in the player lookup queue, and set them to "updated"
+                if (each.personaname == null || (each.memberjoin == false && each.updated == false && GetEpochSeconds() - 60 > each.lastseen))
+                {
+                    playerstolookup.Add(each);
+                    each.updated = true;
                 }
             }
+            //We're going through the list of players to look up, and concatting the steamIDs and IPaddresses to use as arguments in the API
             foreach (FakeMW2SA.PlayerModel each in playerstolookup) { SteamIDs = SteamIDs + each.steamid + ","; }
             foreach (FakeMW2SA.PlayerModel each in playerstolookup) { Ipaddresses = Ipaddresses + each.ip + ","; }
             if (playerstolookup.Count > 0)
