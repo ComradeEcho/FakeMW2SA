@@ -130,8 +130,12 @@ namespace FakeMW2SA
             }
             catch (HttpListenerException)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Unable to open the application on port 28961. Is the application already running?");
-                Console.ReadLine();
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Press any key to exit.");
+                Console.ReadKey();
+                Environment.Exit(1);
             }
             catch (Exception e)
             {

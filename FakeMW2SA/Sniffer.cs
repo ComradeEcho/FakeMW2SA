@@ -17,38 +17,52 @@ namespace FakeMW2SA
         public static void Run()
         {
             FakeMW2SA.Utils.Clearfirewall(); //Clear firewall rules upon first launching the application
-            var devices = CaptureDeviceList.Instance;
-            if (devices.Count < 1)
+            try
             {
-                throw new Exception("No interfaces found! Make sure WinPcap is installed.");
-            }
-            foreach (SharpPcap.WinPcap.WinPcapDevice dev in devices)
-            {
-                //Write each device to the console.
-                //Console.Out.WriteLine("{0}", dev.Description);
-
-                foreach (SharpPcap.LibPcap.PcapAddress addr in dev.Addresses)
+                var devices = CaptureDeviceList.Instance;
+                if (devices.Count < 1)
                 {
-                    if (addr.Addr != null && addr.Addr.ipAddress != null)
+                    throw new Exception("No interfaces found! Make sure Npcap is installed.");
+                }
+                foreach (SharpPcap.WinPcap.WinPcapDevice dev in devices)
+                {
+                    //Write each device to the console.
+                    //Console.Out.WriteLine("{0}", dev.Description);
+
+                    foreach (SharpPcap.LibPcap.PcapAddress addr in dev.Addresses)
                     {
-                        localipaddresses.Add(addr.Addr.ipAddress.ToString());
+                        if (addr.Addr != null && addr.Addr.ipAddress != null)
+                        {
+                            localipaddresses.Add(addr.Addr.ipAddress.ToString());
+                        }
                     }
                 }
-            }
-            foreach (var device in devices)
+                foreach (var device in devices)
+                {
+                    if (device == null) continue;
+                    device.OnPacketArrival += DeviceOnOnPacketArrival;
+                    device.Open(DeviceMode.Promiscuous, ReadTimeoutMilliseconds);
+                    // tcpdump filter to capture only game packets
+                    device.Filter = "udp and port 28960";
+                    Action action = device.Capture;
+                    action.BeginInvoke(ar => action.EndInvoke(ar), null);
+
+
+
+                }
+            } catch(DllNotFoundException)
             {
-                if (device == null) continue;
-                device.OnPacketArrival += DeviceOnOnPacketArrival;
-                device.Open(DeviceMode.Promiscuous, ReadTimeoutMilliseconds);
-                // tcpdump filter to capture only game packets
-                device.Filter = "udp and port 28960";
-                Action action = device.Capture;
-                action.BeginInvoke(ar => action.EndInvoke(ar), null);
-
-
-
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("No interfaces found! Make sure Npcap is installed.");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("https://nmap.org/npcap/");
+                Console.WriteLine("Press any key to exit.");
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.ReadKey();
+                Environment.Exit(1);
             }
         }
+
         public static void DeviceOnOnPacketArrival(object sender, CaptureEventArgs captureEventArgs)
         {
             int numberofplayers = 0;
