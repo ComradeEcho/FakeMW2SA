@@ -149,11 +149,6 @@ namespace FakeMW2SA
             foreach (PlayerModel each in FakeMW2SA.Program.players)
             {
                 if (each.personaname == null || (each.memberjoin == false && each.updated == false && GetEpochSeconds() - 60 > each.lastseen)) { playerstolookup.Add(each); each.updated = true; }
-                if (each.personaname == "ComradeEcho" && each.memberjoin == false && each.updated == false && GetEpochSeconds() - 60 > each.lastseen) {
-                    Console.WriteLine(GetEpochSeconds());
-                    Console.WriteLine(each.lastseen);
-                    Console.WriteLine(GetEpochSeconds() - 60 > each.lastupdated);
-                    Console.WriteLine("___________________________");
                 }
             }
             foreach (FakeMW2SA.PlayerModel each in playerstolookup) { SteamIDs = SteamIDs + each.steamid + ","; }
