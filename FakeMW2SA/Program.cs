@@ -85,6 +85,7 @@ namespace FakeMW2SA
         }
         static void Main(string[] args)
         {
+            Console.Title = "FakeMW2SA Version "+ typeof(FakeMW2SA.Program).Assembly.GetName().Version.ToString();
             FakeMW2SA.HttpClient.Start();
             FakeMW2SA.Sniffer.Start();
             WriteOnBottomLine("0");
