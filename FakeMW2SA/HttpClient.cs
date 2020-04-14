@@ -19,10 +19,10 @@ namespace FakeMW2SA
             try
             {
                 HttpListener listener = new HttpListener();
-                listener.Prefixes.Add("http://localhost:28961/");
-                listener.Prefixes.Add("http://127.0.0.1:28961/");
+                listener.Prefixes.Add("http://localhost:" + Program.port + "/");
+                listener.Prefixes.Add("http://127.0.0.1:" + Program.port + "/");
                 listener.Start();
-                Console.WriteLine("Listening on http://localhost:28961 and http://127.0.0.1:28961");
+                Console.WriteLine("Listening on http://localhost:" + Program.port + "/" + "and http://127.0.0.1:" + Program.port + "/");
                 while (true)
                 {
                     string responseString = String.Format("" + @"
@@ -73,7 +73,7 @@ namespace FakeMW2SA
                                         </li>
                                           <li class='nav-item'>
 
-                                          <a class='nav-link' href='http://localhost:28961/?action=players&csrf=" + FakeMW2SA.Program.csrf + @"'>JSON</a>
+                                          <a class='nav-link' href='http://localhost:" + Program.port + "/" + "/?action=players&csrf=" + FakeMW2SA.Program.csrf + @"'>JSON</a>
                                         </li>
                                       </ul>
                                       <span class='navbar-text'>Host =&nbsp;</span><span class='navbar-text' id='host'>0.0.0.0</span>
@@ -131,7 +131,7 @@ namespace FakeMW2SA
             catch (HttpListenerException)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Unable to open the application on port 28961. Is the application already running?");
+                Console.WriteLine("Unable to open the application on port " + Program.port + "/" + ". Is the application already running?");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Press any key to exit.");
                 Console.ReadKey();

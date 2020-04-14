@@ -24,7 +24,7 @@ namespace FakeMW2SA
                 {
                     throw new Exception("No interfaces found! Make sure Npcap is installed.");
                 }
-                foreach (SharpPcap.WinPcap.WinPcapDevice dev in devices)
+                foreach (SharpPcap.Npcap.NpcapDevice dev in devices)
                 {
                     //Write each device to the console.
                     //Console.Out.WriteLine("{0}", dev.Description);
@@ -68,7 +68,7 @@ namespace FakeMW2SA
             int numberofplayers = 0;
             var packet = Packet.ParsePacket(captureEventArgs.Packet.LinkLayerType, captureEventArgs.Packet.Data);
             var eth = (EthernetPacket)packet;
-            var PacketPayloadInHex = BitConverter.ToString(eth.BytesHighPerformance.Bytes).Replace("-", string.Empty);
+            var PacketPayloadInHex = BitConverter.ToString(eth.Bytes).Replace("-", string.Empty);
             var DestIP = new IPAddress(long.Parse(FakeMW2SA.Utils.ReverseBytes(PacketPayloadInHex.Substring(60, 8)), System.Globalization.NumberStyles.AllowHexSpecifier)).ToString();
             var SourceIP = new IPAddress(long.Parse(FakeMW2SA.Utils.ReverseBytes(PacketPayloadInHex.Substring(52, 8)), System.Globalization.NumberStyles.AllowHexSpecifier)).ToString();
             if (!localipaddresses.Contains(SourceIP)){ FakeMW2SA.Program.Addipaddress(SourceIP); }

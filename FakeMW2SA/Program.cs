@@ -18,6 +18,7 @@ namespace FakeMW2SA
         public static int apicalls = 0;
         public static int partystatecount = 0;
         public static int memberjoincount = 0;
+        public static long port = 28961;
         public static int csrf = new Random().Next();
         public static List<string> ipaddresses = new List<string>();
         public static int ipindex = 0;
@@ -85,6 +86,10 @@ namespace FakeMW2SA
         }
         static void Main(string[] args)
         {
+            if (args.Length > 0)
+            {
+                Int64.TryParse(args[0], out port);
+            }
             Console.Title = "FakeMW2SA Version "+ typeof(FakeMW2SA.Program).Assembly.GetName().Version.ToString();
             FakeMW2SA.HttpClient.Start();
             FakeMW2SA.Sniffer.Start();
