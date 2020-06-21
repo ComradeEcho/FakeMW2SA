@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang='en'>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+<head>
+    <style type="text/css">
+        [BootstrapCss]
+    </style>
+    <script>var csrf = [CSRF]</script>
+</head>
+<body>
+    <div class='wrapper' style='margin:auto;'>
+        <nav class='navbar navbar-expand-lg navbar-light bg-light'>
+            <a class='navbar-brand' href='#'>FakeMW2SA</a>
+            <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
+                <span class='navbar-toggler-icon'></span>
+            </button>
+
+            <div class='collapse navbar-collapse' id='navbarSupportedContent'>
+                <ul class='navbar-nav mr-auto'>
+                    <li class='nav-item active'>
+                        <a class='nav-link' href='#'>Home <span class='sr-only'>(current)</span></a>
+                    </li>
+                    <li class='nav-item'>
+                        <a class='nav-link' href='#' onclick="" memberjointoggle()""> Memberjoin</a>
+                    </li>
+                    <li class='nav-item dropdown'>
+                        <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                            IPs
+                        </a>
+                        <div id='iplist' class='dropdown-menu' aria-labelledby='navbarDropdown'>
+
+                        </div>
+                    </li>
+                    <li class='nav-item dropdown'>
+                        <a class='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                            Stats
+                        </a>
+                        <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                            <a class='dropdown-item' id='apicalls' href='#'>API calls</a>
+                            <a class='dropdown-item' id='partystatepackets' href='#'>partystate packets</a>
+                            <a class='dropdown-item' id='memberjoinpackets' href='#'>Memberjoin packets</a>
+                        </div>
+                    </li>
+                    <li class='nav-item'>
+                        <a class='nav-link' href='#'>About</a>
+                    </li>
+                    <li class='nav-item'>
+
+                        <a class='nav-link' href='http://localhost:[PORT]/?action=players&csrf=" + FakeMW2SA.Program.csrf + @"'>JSON</a>
+                    </li>
+                </ul>
+                <span class='navbar-text'>Host =&nbsp;</span><span class='navbar-text' id='host'>0.0.0.0</span>
+            </div>
+        </nav>
+        <div id='playertable'></div>
+    </div>
+    <script type="text/javascript">
+        [JQUERY]
+    </script>
+    <script type="text/javascript">        
+        [JQUERYUI]
+    </script>
+    <script type="text/javascript">        
+        [POPPER]
+    </script>
+    <script type="text/javascript">
+        [BOOTSTRAP]       
+    </script>
+    <script type="text/javascript">
+        [CLIENTJS]
+    </script>
+    <script type="text/javascript">
+        [MOMENT]
+    </script>
+    <style type="text/css">
+        [CSS]
+    </style>
+</body>
+</html>
