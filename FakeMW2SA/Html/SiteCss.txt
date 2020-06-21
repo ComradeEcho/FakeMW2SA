@@ -1,0 +1,160 @@
+﻿body {
+
+}
+
+.playertable {
+    max-width: 1000px;
+    margin:auto;
+}
+
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+a {
+    text-decoration: none;
+}
+
+
+
+a {
+    color: black!important;
+    text-decoration: none
+}
+
+.color1 {
+    color: #dc3545;
+    /* text-shadow: 0 0 2px #000000; */
+}
+
+.color2 {
+    color: #28a745;
+    /* text-shadow: 0 0 2px #000000; */
+}
+
+.color3 {
+    color: #fd7e14;
+    /* text-shadow: 0 0 2px #000000; */
+}
+
+.color4 {
+    color: #007bff;
+    /* text-shadow: 0 0 2px #000000; */
+}
+
+.color5 {
+    color: #20c997;
+    /* text-shadow: 0 0 2px #000000; */
+}
+
+.color6 {
+    color: #e83e8c;
+    /* text-shadow: 0 0 2px #000000; */
+}
+
+.color7 {
+    color: #343a40;
+    /* text-shadow: 0 0 2px #000000; */
+}
+
+.color8 {
+    color: #343a40;
+    text-shadow: 0 0 1px #000000;
+}
+
+.color9 {
+    color: #343a40;
+    /* text-shadow: 0 0 2px #000000; */
+}
+td#VAC{
+    max-width : 75px;
+}
+div.private {
+    background-color: #f0ad4e;
+    border-color: #eea236;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    padding: 3px;
+    color: white;
+    font-size: 9px;
+}
+
+div.vac {
+    background-color: #d9534f;
+    border-color: #d9534f;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    padding: 3px;
+    color: white;
+    font-size: 10px;
+    font-stretch: semi-condensed;
+}
+
+div.nobypass {
+    background-color: #5bc0de;
+    border-color: #5bc0de;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    padding: 3px;
+    color: white;
+    font-size: 10px;
+    font-stretch: semi-condensed;
+}
+
+.flag {
+    object-fit:cover;
+    height: 18px;
+    width: 30px;
+    border-color: #444;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+img.rank {
+    max-height: 30px;
+    display: inline-block;
+    padding-right: 3px;
+    padding-bottom: 0px;
+}
+
+div.level {
+    font-size: 15px;
+    font-weight: 500;
+    display: inline-block;
+    margin-right: 5px;
+    vertical-align: bottom;
+
+}
+td.rank {
+    width: auto;
+    white-space: nowrap;
+}
+th.rank {
+    width: 30px;
+}
+
+.table {
+    margin: 0px;
+}
+td.rank, td.name, td.hours, td.vac, td.location, td.lastseen {
+    vertical-align: bottom;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.table{
+    width: auto;
+    margin: auto;
+}
+.navbar{
+    max-width: 1200px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+.banned{
+    background-color: dc3545;
+    color: #fff;
+}

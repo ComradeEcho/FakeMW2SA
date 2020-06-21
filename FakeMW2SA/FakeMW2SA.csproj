@@ -100,6 +100,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper.cs" />
     <Compile Include="HttpClient.cs" />
     <Compile Include="PlayerModel.cs" />
     <Compile Include="Program.cs" />
@@ -118,6 +119,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="5832406b04c416771fe0b20549b10d0dc7c679de.ico" />
+    <Content Include="Html\BootstrapCss.txt" />
+    <Content Include="Html\ClientJs.txt" />
+    <Content Include="Html\FakeMWHtml.html" />
+    <Content Include="Html\jQuery.txt" />
+    <Content Include="Html\jQueryUI.txt" />
+    <Content Include="Html\MomentJs.txt" />
+    <Content Include="Html\Popper.txt" />
+    <Content Include="Html\Bootstrap.txt" />
+    <Content Include="Html\SiteCss.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
