@@ -101,9 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper.cs" />
-    <Compile Include="C:\Users\kausar\Desktop\HttpClient.cs">
-      <Link>HttpClient.cs</Link>
-    </Compile>
+    <Compile Include="HttpClient.cs" />
     <Compile Include="PlayerModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

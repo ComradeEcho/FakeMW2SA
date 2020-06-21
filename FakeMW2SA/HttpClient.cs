@@ -40,33 +40,21 @@ namespace FakeMW2SA
                     responseString = responseString.Replace("[CSRF]", FakeMW2SA.Program.csrf.ToString());
 
 
-                    //responseString = responseString.Replace("[BootstrapCss]", HtmlResource.BootstrapCss);
-                    //responseString = responseString.Replace("[JQUERY]", HtmlResource.jQuery);
-                    //responseString = responseString.Replace("[JQUERYUI]", HtmlResource.jQueryUI);
-                    //responseString = responseString.Replace("[POPPER]", HtmlResource.Popper);
-                    //responseString = responseString.Replace("[BOOTSTRAP]", HtmlResource.Bootstrap);
-                    //responseString = responseString.Replace("[CLIENTJS]", HtmlResource.ClientJs);
-                    //responseString = responseString.Replace("[MOMENT]", HtmlResource.MomentJs);
-                    //responseString = responseString.Replace("[CSS]", HtmlResource.SiteCss);
-                    //responseString = responseString.Replace("[CSRF]", FakeMW2SA.Program.csrf.ToString());
-
-
-
-                    //responseString = responseString.Replace("[BootstrapCss]", Helper.LinkCdn("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"));
-                    //responseString = responseString.Replace("[JQUERY]", Helper.LinkCdn("https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"));
-                    //responseString = responseString.Replace("[JQUERYUI]", Helper.LinkCdn("http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"));
-                    //responseString = responseString.Replace("[POPPER]", Helper.LinkCdn("https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"));
-                    //responseString = responseString.Replace("[BOOTSTRAP]", Helper.LinkCdn("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"));
-                    //responseString = responseString.Replace("[CLIENTJS]", Helper.LinkCdn("http://mw2.adie.space/js/client.js"));
-                    //responseString = responseString.Replace("[MOMENT]", Helper.LinkCdn("http://mw2.adie.space/js/moment.js"));
-                    //responseString = responseString.Replace("[CSS]", Helper.LinkCdn("http://mw2.adie.space/css/site.css"));
+                    //responseString = responseString.Replace("[BootstrapCss]", Helper.GetCdnContent("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"));
+                    //responseString = responseString.Replace("[JQUERY]", Helper.GetCdnContent("https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"));
+                    //responseString = responseString.Replace("[JQUERYUI]", Helper.GetCdnContent("http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"));
+                    //responseString = responseString.Replace("[POPPER]", Helper.GetCdnContent("https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"));
+                    //responseString = responseString.Replace("[BOOTSTRAP]", Helper.GetCdnContent("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"));
+                    //responseString = responseString.Replace("[CLIENTJS]", Helper.GetCdnContent("http://mw2.adie.space/js/client.js"));
+                    //responseString = responseString.Replace("[MOMENT]", Helper.GetCdnContent("http://mw2.adie.space/js/moment.js"));
+                    //responseString = responseString.Replace("[CSS]", Helper.GetCdnContent("http://mw2.adie.space/css/site.css"));
                     //responseString = responseString.Replace("[CSRF]", FakeMW2SA.Program.csrf.ToString());
 
                     HttpListenerContext context = listener.GetContext();
                     HttpListenerRequest request = context.Request;
                     HttpListenerResponse response = context.Response;
                     string clientIP = context.Request.RemoteEndPoint.ToString();
-                    
+
                     response.AppendHeader("Access-Control-Allow-Origin", "*");
                     if (request.QueryString.GetValues("action") != null && request.QueryString.GetValues("csrf") != null && request.QueryString.GetValues("csrf")[0] == FakeMW2SA.Program.csrf.ToString())
                     {
@@ -86,7 +74,7 @@ namespace FakeMW2SA
                                 FakeMW2SA.Utils.Clearfirewall();
                                 break;
                             case "host":
-                                    responseString = JsonConvert.SerializeObject(new FakeMW2SA.JsonOutput());
+                                responseString = JsonConvert.SerializeObject(new FakeMW2SA.JsonOutput());
                                 break;
                             default:
                                 break;
@@ -96,7 +84,7 @@ namespace FakeMW2SA
                     response.ContentLength64 = buffer.Length;
                     System.IO.Stream output = response.OutputStream;
                     output.Write(buffer, 0, buffer.Length);
-                    
+
                 }
             }
             catch (HttpListenerException)
